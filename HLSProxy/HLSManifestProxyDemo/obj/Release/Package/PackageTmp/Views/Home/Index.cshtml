@@ -1,0 +1,88 @@
+﻿<div class="jumbotron">
+    <h1>HLS Manifest Proxy Demo</h1>
+    <p class="lead">Demo to showcase the use of the ManifestProxyController, as outlined in the <a href="http://azure.microsoft.com/blog/2015/03/06/how-to-make-token-authorized-aes-encrypted-hls-stream-working-in-safari/">blogpost</a> by Mingfei.</p>
+</div>
+<div class="row">
+    @{
+        string playbackurl = ViewData["playbackurl"] as string;
+
+        string playbackurl_sample1 = "http://amssamples.streaming.mediaservices.windows.net/830584f8-f0c8-4e41-968b-6538b9380aa5/TearsOfSteelTeaser.ism/manifest";
+        string playbackurl_sample2 = "http://amssamples.streaming.mediaservices.windows.net/9ead18f1-29f8-453c-8721-4becc00ff611/BigBuckBunnyTrailer.ism/manifest";
+        string webtoken_sample1 = "Bearer=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiI5ZGRhMGJjYy01NmZiLTQxNDMtOWQzMi0zYWI5Y2M2ZWE4MGIiLCJpc3MiOiJodHRwOi8vdGVzdGFjcy5jb20vIiwiYXVkIjoidXJuOnRlc3QiLCJleHAiOjE3MTA4MDczODl9.lJXm5hmkp5ArRIAHqVJGefW2bcTzd91iZphoKDwa6w8";
+        string webtoken_sample2 = "urn%3amicrosoft%3aazure%3amediaservices%3acontentkeyidentifier=5f5076de-4322-42f7-a533-6265f686d5b9&Audience=urn%3atest&ExpiresOn=4581880130&Issuer=http%3a%2f%2ftestacs.com%2f&HMACSHA256=%2bx77Qo0CeBzP4aCntfe2sVkbKeKguOUNAebHQb53sLc%3d";
+
+        if (IsPost)
+        {
+            playbackurl = Request["playbackurl"];
+            string webtoken = Request["webtoken"];
+            string urlencoded_webtoken = HttpUtility.UrlEncode(webtoken);
+            string proxyurl = "Home/Manifest?playbackUrl=" + @playbackurl + "(format=m3u8-aapl)";
+            string urlencoded_proxyurl = HttpUtility.UrlEncode("http://benlamhlsproxy.azurewebsites.net/" + @proxyurl + "&webtoken=" + @urlencoded_webtoken);
+            string urlencoded_proxyurl2 = "http://benlamhlsproxy.azurewebsites.net/Home/Manifest?playbackUrl=" + HttpUtility.UrlEncode(@playbackurl + "(format=m3u8-aapl)") + "&webtoken=" + @urlencoded_webtoken;
+
+            <form method="post" action="">
+                Manifest URL:<br />
+                <input type="text" name="playbackurl" value="@playbackurl" size="150"/><br />
+                SWT or JWT Token:<br />
+                <input type="text" name="webtoken" value="@webtoken" size="150"/><br /><br />
+                <input type="submit" value="Submit" class="submit" />
+            </form>
+            <p>
+                <br />
+                You entered: <br />
+                Manifest URL: @playbackurl <br /> <br />
+                SWT or JWT Token: @webtoken <br /> <br />
+                <a href=@urlencoded_proxyurl2>HLS Manifest Proxy URL played by Safari or Edge natively</a> <br/> <br/>
+                <a href="http://ampdemo.azureedge.net/azuremediaplayer.html?url=@urlencoded_proxyurl&format=hls&aes=true">HLS Manifest Proxy URL played by Azure Media player at http://aka.ms/azuremediaplayer </a> <br /> <br />
+            </p>
+            <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "silverlightSS", "html5"], "nativeControlsForTouch": false}'>
+
+            @if (webtoken.StartsWith("Bearer=", StringComparison.OrdinalIgnoreCase))
+            {
+                <source src="@playbackurl"
+                        type="application/vnd.ms-sstr+xml"
+                        data-setup='{"protectionInfo": [{"type": "AES", "authenticationToken": "@webtoken"}],"streamingFormats":["SMOOTH","DASH"]}' />
+            }
+            else
+            {
+                <source src="@playbackurl"
+                        type="application/vnd.ms-sstr+xml"
+                        data-setup='{"protectionInfo": [{"type": "AES", "authenticationToken": "Bearer=@webtoken"}],"streamingFormats":["SMOOTH","DASH"]}' />
+            }
+                <source src="/@proxyurl&webtoken=@urlencoded_webtoken" type="application/vnd.apple.mpegurl" data-setup='{"disableUrlRewriter": true}' />
+          </video>
+        }
+        else
+        {
+            <form method="post" action="">
+                Manifest URL:<br />
+                <input type="text" id="playbackurl" name="playbackurl" value="@playbackurl" size="150"/><br />
+                Token:<br />
+                <input type="text" id="webtoken" name="webtoken" value="" size="150"/><br /><br />
+                <input type="submit" value="Submit" class="submit" />
+                <br /> <br/>
+                Example: <br />
+                <b>Manifest URL </b>@playbackurl_sample1<br/>
+                <b>JWT Token </b>@webtoken_sample1<br/>
+                <button onclick="insert_value1()">Try it!</button>
+                <br/><br/>
+                <b>Manifest URL </b>@playbackurl_sample2<br/>
+                <b>SWT Token </b>@webtoken_sample2<br/>
+                <button onclick="insert_value2()">Try it!</button>
+            </form>
+        }
+
+        <script>
+            function insert_value1() {
+                document.getElementById("playbackurl").value = "@playbackurl_sample1";
+                document.getElementById("webtoken").value = "@webtoken_sample1";
+            }
+
+            function insert_value2() {
+                document.getElementById("playbackurl").value = "@playbackurl_sample2";
+                document.getElementById("webtoken").value = "@webtoken_sample2";
+                document.getElementById("webtoken").value = document.getElementById("webtoken").value.replace(/&amp;/g, '&');
+            }
+        </script>
+    }
+</div>

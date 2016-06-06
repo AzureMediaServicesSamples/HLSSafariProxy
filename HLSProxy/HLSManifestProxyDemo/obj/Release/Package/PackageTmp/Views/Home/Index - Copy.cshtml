@@ -1,0 +1,25 @@
+﻿<div class="jumbotron">
+    <h1>Ben - HLS Manifest Proxy demo</h1>
+    <p class="lead">Demo to showcase the use of the ManifestProxyController, as outlined in the <a href="">blogpost</a> by Mingfei.</p>
+    <p>
+        <a href="http://azure.microsoft.com/blog/2015/03/06/how-to-make-token-authorized-aes-encrypted-hls-stream-working-in-safari/" class="btn btn-primary btn-lg">Blogpost</a>
+        <a href="https://github.com/AzureMediaServicesSamples/AESHLSSafari/tree/master" class="btn btn-primary btn-lg">Github Repo</a>
+    </p>
+    <p>
+        <a href="/Home/Manifest?playbackUrl=http://benlamsdemo1.streaming.mediaservices.windows.net/acccda23-1bb2-4568-ad72-fd47e4e70a35/DemoVideo1.ism/manifest(format=m3u8-aapl)">top level manifest</a> 
+    </p>
+</div>
+<div class="row">
+    <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "silverlightSS", "html5"], "nativeControlsForTouch": false}'>       
+
+        <source src="http://benlamsdemo1.streaming.mediaservices.windows.net/acccda23-1bb2-4568-ad72-fd47e4e70a35/DemoVideo1.ism/manifest"
+                type="application/vnd.ms-sstr+xml"
+                data-setup='{"protectionInfo": [{"type": "AES", "authenticationToken": "Bearer=urn%3amicrosoft%3aazure%3amediaservices%3acontentkeyidentifier=2f04925a-ff16-474a-87cc-c73bbb76ba20&Audience=urn%3atest&ExpiresOn=1475247485&Issuer=http%3a%2f%2ftestacs&HMACSHA256=Fq6uFJxD4jyiM%2bKjwDmCBUqmWtN2C1SPJmKjLgtdSfU%3d"}],"streamingFormats":["SMOOTH","DASH"]}' />
+        <source src="/Home/Manifest?playbackUrl=http://benlamsdemo1.streaming.mediaservices.windows.net/acccda23-1bb2-4568-ad72-fd47e4e70a35/DemoVideo1.ism/manifest(format=m3u8-aapl)" type="application/vnd.apple.mpegurl" data-setup='{"disableUrlRewriter": true}' />
+       
+    </video>
+
+</div>
+<! -- what works: format=m3u8-aapl, token with key id as claim; format=m3u8-aapl, token with key id -->
+<!-- what doesn't work: format=m3u8-aapl-v3, token with key id as claim -->
+@*Bearer urn%3amicrosoft%3aazure%3amediaservices%3acontentkeyidentifier=2f04925a-ff16-474a-87cc-c73bbb76ba20&Audience=urn%3atest&ExpiresOn=1475247485&Issuer=http%3a%2f%2ftestacs&HMACSHA256=Fq6uFJxD4jyiM%2bKjwDmCBUqmWtN2C1SPJmKjLgtdSfU%3d*@
