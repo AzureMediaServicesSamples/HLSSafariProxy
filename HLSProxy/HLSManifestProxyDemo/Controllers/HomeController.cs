@@ -69,7 +69,7 @@ namespace HLSManifestProxyDemo.Controllers
         {
             //TODO: implement your own token acquisition logic:        
             //return @"urn%3amicrosoft%3aazure%3amediaservices%3acontentkeyidentifier=8d6f52e7-c545-46e9-bbdd-19ee5e87fd55&Audience=urn%3atest&ExpiresOn=1483149817&Issuer=http%3a%2f%2ftestacs&HMACSHA256=v87VmN1z7890WtM6xauT%2bpo3k%2fsaq0yhlVASkcr5RJM%3d";
-            return @"urn%3amicrosoft%3aazure%3amediaservices%3acontentkeyidentifier=2f04925a-ff16-474a-87cc-c73bbb76ba20&Audience=urn%3atest&ExpiresOn=1461902688&Issuer=http%3a%2f%2ftestacs&HMACSHA256=5corSb9EJs3ns7auiu%2foclCCvyfuGdKEa%2fK1eZKDN7o%3d";                               
+            return @"Audience=urn%3atest&ExpiresOn=1464936320&Issuer=http%3a%2f%2ftestacs&HMACSHA256=iuUh%2bS3RP7rKyOxF1wytfqQcN0CWZ3T%2fCwGh%2bNIJQmE%3d";                               
             //return @"Audience=urn%3Acaa&Issuer=http%3A%2F%2Fwww.caa.com%2F&ExpiresOn=3329668306&HMACSHA256=NPbPmS5bL1fKrjJ0QoJpQfY8iXT9Ycl89QUIPUImcZg%3D";                     
             //return @"Audience=urn:caa&Issuer=http://www.caa.com/&ExpiresOn=3329668306&HMACSHA256=NPbPmS5bL1fKrjJ0QoJpQfY8iXT9Ycl89QUIPUImcZg=";                     
         }

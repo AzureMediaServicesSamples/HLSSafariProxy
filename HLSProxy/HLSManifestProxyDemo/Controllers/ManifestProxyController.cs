@@ -30,10 +30,10 @@ namespace Microsoft.Azure.CloudVideo.VideoManagementService.Cms.Controllers
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", Justification = "These are format strings, not URIs")]
         public HttpResponseMessage Get(string playbackUrl, string token)
         {          
-            //if (token.StartsWith("Bearer=", StringComparison.OrdinalIgnoreCase))
-            //{
-            //    token = token.Substring("Bearer=".Length).Trim();
-            //}
+            if (token.StartsWith("Bearer", StringComparison.OrdinalIgnoreCase))
+            {
+                token = token.Substring("Bearer".Length).Trim();
+            }
             var collection = HttpUtility.ParseQueryString(token);
             var authToken = collection.ToQueryString();
             string armoredAuthToken = HttpUtility.UrlEncode(authToken);

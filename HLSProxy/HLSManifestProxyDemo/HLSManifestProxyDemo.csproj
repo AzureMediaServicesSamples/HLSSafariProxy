@@ -21,7 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>afbe62f5</NuGetPackageImportStamp>
-    <ApplicationInsightsResourceId>/subscriptions/3c017a59-7b57-4d18-84e0-0d1da6971734/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/HLSManifestProxyDemo</ApplicationInsightsResourceId>
+    <ApplicationInsightsResourceId>/subscriptions/651dc44c-5d8e-48da-8cd3-cd79224ac290/resourcegroups/HLSManifestProxyDemo/providers/microsoft.insights/components/HLSManifestProxyDemo</ApplicationInsightsResourceId>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -264,6 +264,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="ApplicationInsights.config" />
+    <None Include="Properties\PublishProfiles\benlamhlsproxy - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\benlamhlsproxy - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\benmanifestproxydemo.pubxml" />
     <None Include="Properties\PublishProfiles\mingfeiy - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mingfeiy - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -294,7 +297,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index - Copy.cshtml" />
-    <Content Include="Service References\Application Insights\ConnectedService.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,9 +307,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
