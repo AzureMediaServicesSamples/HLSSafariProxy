@@ -50,7 +50,7 @@ namespace HLSManifestProxyDemo.Controllers
             //var ttoken = collection.ToQueryString();
             //string token = HttpUtility.UrlEncode(ttoken);
 
-            var token = webtoken;
+            var token = "Bearer=" + webtoken;
 
             var manifestRetriever = getManifestRetriever();                      
 
