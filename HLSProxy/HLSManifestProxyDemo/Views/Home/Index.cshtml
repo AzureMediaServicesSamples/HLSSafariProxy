@@ -11,9 +11,12 @@
 
             string webtoken = Request["webtoken"];
 
+
+            webtoken = ViewData["webtoken"] as string;
+
             string urlencoded_webtoken = HttpUtility.UrlEncode(webtoken);
             string proxyurl = "Home/Manifest?playbackUrl=" + @playbackurl + "(format=m3u8-aapl)";
-            string urlencoded_proxyurl = "http://mingfeiy.azurewebsites.net/" + @proxyurl + "&webtoken=" + @urlencoded_webtoken;
+            string urlencoded_proxyurl = "http://localhost:8050/" + @proxyurl + "&webtoken=" + @urlencoded_webtoken;
 
             <form method="post" action="">
                 Manifest URL:<br />
