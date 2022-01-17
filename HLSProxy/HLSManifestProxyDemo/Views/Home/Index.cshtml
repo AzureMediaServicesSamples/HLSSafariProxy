@@ -16,13 +16,13 @@
 
             string urlencoded_webtoken = HttpUtility.UrlEncode(webtoken);
             string proxyurl = "Home/Manifest?playbackUrl=" + @playbackurl + "(format=m3u8-aapl)";
-            string urlencoded_proxyurl = "http://localhost:8050/" + @proxyurl + "&webtoken=" + @urlencoded_webtoken;
+            string urlencoded_proxyurl = "http://jameelaesahlsproxy.azurewebsites.net/" + @proxyurl + "&webtoken=" + @urlencoded_webtoken;
 
             <form method="post" action="">
                 Manifest URL:<br />
                 <input type="text" name="playbackurl" value="@playbackurl" size="150"/><br />
                 SWT Token:<br />
-                <input type="text" name="webtoken" value="@webtoken" size="150"/><br /><br />
+                <input type="text" name="webtoken" value="Bearer=@webtoken" size="150"/><br /><br />
                 <input type="submit" value="Submit" class="submit" />
             </form>
             <p>
@@ -30,7 +30,10 @@
                 You entered: <br />
                 Manifest URL: @playbackurl <br /> <br />
                 SWT Token: @webtoken <br /> <br />
-                HLS Proxy URL: @urlencoded_proxyurl  <br/> <br/>
+                HLS Proxy URL: @urlencoded_proxyurl  <br /> <br />
+
+                <a href=" @urlencoded_proxyurl">HLS Proxy URL for Native Safari </a> <br /> <br />
+
                 <a href="http://ampdemo.azureedge.net/azuremediaplayer.html?url=@urlencoded_proxyurl&format=hls&aes=true">HLS Proxy URL played by Azure Media player at http://aka.ms/azuremediaplayer </a> <br /> <br />
             </p>
             <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "silverlightSS", "html5"], "nativeControlsForTouch": false}'>

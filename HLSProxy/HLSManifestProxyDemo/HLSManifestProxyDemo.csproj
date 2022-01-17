@@ -280,6 +280,7 @@
     <None Include="Properties\PublishProfiles\benlamhlsproxy - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\benlamhlsproxy - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\benmanifestproxydemo.pubxml" />
+    <None Include="Properties\PublishProfiles\JameelaEsaHLSProxy - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mingfeiy - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mingfeiy - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
