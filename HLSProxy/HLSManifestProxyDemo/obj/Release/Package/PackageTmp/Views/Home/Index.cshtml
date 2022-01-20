@@ -1,6 +1,6 @@
 ﻿<div class="jumbotron">
-    <h1>HLS Manifest Proxy Demo</h1>
-    <p class="lead">Demo to showcase the use of the ManifestProxyController, as outlined in the <a href="http://azure.microsoft.com/blog/2015/03/06/how-to-make-token-authorized-aes-encrypted-hls-stream-working-in-safari/">blogpost</a> by Mingfei.</p>
+    <h1>HLS Manifest Proxy Demo v2</h1>
+    <p class="lead">Demo to showcase the use of the ManifestProxyController, as outlined in the <a href="http://azure.microsoft.com/blog/2015/03/06/how-to-make-token-authorized-aes-encrypted-hls-stream-working-in-safari/">blogpost</a>.  Revised by JameelaEsa to include an Authentication Service to automatically generate tokens.</p>
 </div>
 <div class="row">
     @{
@@ -21,7 +21,7 @@
             <form method="post" action="">
                 Manifest URL:<br />
                 <input type="text" name="playbackurl" value="@playbackurl" size="150"/><br />
-                SWT Token:<br />
+                SWT/JWT Token:<br />
                 <input type="text" name="webtoken" value="@webtoken" size="150"/><br /><br />
                 <input type="submit" value="Submit" class="submit" />
             </form>
@@ -29,7 +29,7 @@
                 <br />
                 You entered: <br />
                 Manifest URL: @playbackurl <br /> <br />
-                SWT Token: @webtoken <br /> <br />
+                SWT/JWT Token: @webtoken <br /> <br />
                 HLS Proxy URL: @urlencoded_proxyurl  <br /> <br />
 
                 <a href=" @urlencoded_proxyurl">HLS Proxy URL for Native Safari </a> <br /> <br />
@@ -45,19 +45,19 @@
 
                 <source src="@playbackurl"
                         type="application/vnd.ms-sstr+xml"
-                        data-setup='{"protectionInfo": [{"type": "AES", "authenticationToken": "Bearer=@webtoken"}],"streamingFormats":["SMOOTH","DASH"]}' />
+                        data-setup='{"protectionInfo": [{"type": "AES", "authenticationToken": "Bearer=@webtoken"}],"streamingFormats":["SMOOTH","DASH","HLS"]}' />
                 <source src="/@proxyurl&webtoken=@urlencoded_webtoken" type="application/vnd.apple.mpegurl" data-setup='{"disableUrlRewriter": true}' />
           </video>
         }
         else
         {
-            <form method="post" action="">
-                Manifest URL:<br />
-                <input type="text" name="playbackurl" value="@playbackurl" size="150"/><br />
-                SWT Token:<br />
-                <input type="text" name="webtoken" value="" size="150"/><br /><br />
-                <input type="submit" value="Submit" class="submit" />
-            </form>
+<form method="post" action="">
+    Manifest URL:<br />
+    <input type="text" name="playbackurl" value="https://amstest-usea.streaming.media.azure.net/e0aef0e0-e5ac-4dbc-96c0-386f4f5e186d/10minMorningYoga.ism/manifest" size="150" /><br />
+    SWT Token:<br />
+    <input type="text" name="webtoken" value="" size="150" /><br /><br />
+    <input type="submit" value="Submit" class="submit" />
+</form>
         }
     }
 </div>
