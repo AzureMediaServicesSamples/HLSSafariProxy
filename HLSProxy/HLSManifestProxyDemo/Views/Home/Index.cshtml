@@ -45,7 +45,7 @@
 
                 <source src="@playbackurl"
                         type="application/vnd.ms-sstr+xml"
-                        data-setup='{"protectionInfo": [{"type": "AES", "authenticationToken": "Bearer=@webtoken"}],"streamingFormats":["SMOOTH","DASH","HLS"]}' />
+                        data-setup='{"protectionInfo": [{"type": "AES", "authenticationToken": "Bearer=@webtoken"}],"streamingFormats":["SMOOTH","DASH"]}' />
                 <source src="/@proxyurl&webtoken=@urlencoded_webtoken" type="application/vnd.apple.mpegurl" data-setup='{"disableUrlRewriter": true}' />
           </video>
         }
