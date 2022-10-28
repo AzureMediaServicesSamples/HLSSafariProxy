@@ -1,6 +1,6 @@
 ﻿<div class="jumbotron">
-    <h1>HLS Manifest Proxy Demo</h1>
-    <p class="lead">Demo to showcase the use of the ManifestProxyController, as outlined in the <a href="http://azure.microsoft.com/blog/2015/03/06/how-to-make-token-authorized-aes-encrypted-hls-stream-working-in-safari/">blogpost</a> by Mingfei.</p>
+    <h1>HLS Manifest Proxy Demo v2</h1>
+    <p class="lead">Demo to showcase the use of the ManifestProxyController, as outlined in the <a href="http://azure.microsoft.com/blog/2015/03/06/how-to-make-token-authorized-aes-encrypted-hls-stream-working-in-safari/">blogpost</a>.  Revised by JameelaEsa to include an Authentication Service to automatically generate tokens.</p>
 </div>
 <div class="row">
     @{
@@ -11,14 +11,17 @@
 
             string webtoken = Request["webtoken"];
 
+
+            webtoken = ViewData["webtoken"] as string;
+
             string urlencoded_webtoken = HttpUtility.UrlEncode(webtoken);
             string proxyurl = "Home/Manifest?playbackUrl=" + @playbackurl + "(format=m3u8-aapl)";
-            string urlencoded_proxyurl = "http://mingfeiy.azurewebsites.net/" + @proxyurl + "&webtoken=" + @urlencoded_webtoken;
+            string urlencoded_proxyurl = "http://jameelaesahlsproxy.azurewebsites.net/" + @proxyurl + "&webtoken=" + @urlencoded_webtoken;
 
             <form method="post" action="">
                 Manifest URL:<br />
                 <input type="text" name="playbackurl" value="@playbackurl" size="150"/><br />
-                SWT Token:<br />
+                JWT Token:<br />
                 <input type="text" name="webtoken" value="@webtoken" size="150"/><br /><br />
                 <input type="submit" value="Submit" class="submit" />
             </form>
@@ -26,8 +29,11 @@
                 <br />
                 You entered: <br />
                 Manifest URL: @playbackurl <br /> <br />
-                SWT Token: @webtoken <br /> <br />
-                HLS Proxy URL: @urlencoded_proxyurl  <br/> <br/>
+                JWT Token: @webtoken <br /> <br />
+                HLS Proxy URL: @urlencoded_proxyurl  <br /> <br />
+
+                <a href=" @urlencoded_proxyurl">HLS Proxy URL for Native Safari </a> <br /> <br />
+
                 <a href="http://ampdemo.azureedge.net/azuremediaplayer.html?url=@urlencoded_proxyurl&format=hls&aes=true">HLS Proxy URL played by Azure Media player at http://aka.ms/azuremediaplayer </a> <br /> <br />
             </p>
             <video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" data-setup='{"techOrder": ["azureHtml5JS", "flashSS", "silverlightSS", "html5"], "nativeControlsForTouch": false}'>
@@ -45,13 +51,13 @@
         }
         else
         {
-            <form method="post" action="">
-                Manifest URL:<br />
-                <input type="text" name="playbackurl" value="@playbackurl" size="150"/><br />
-                SWT Token:<br />
-                <input type="text" name="webtoken" value="" size="150"/><br /><br />
-                <input type="submit" value="Submit" class="submit" />
-            </form>
+<form method="post" action="">
+    Manifest URL:<br />
+    <input type="text" name="playbackurl" value="https://amstest-usea.streaming.media.azure.net/e0aef0e0-e5ac-4dbc-96c0-386f4f5e186d/10minMorningYoga.ism/manifest" size="150" /><br />
+    JWT Token:<br />
+    <input type="text" name="webtoken" value="" size="150" /><br /><br />
+    <input type="submit" value="Submit" class="submit" />
+</form>
         }
     }
 </div>
